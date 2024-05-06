@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title> Lab Master</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <style>
+        :root {
+            --main-color: #2196f3;
+            --main-color-alt: #1787e0;
+        }
+
+        .main-title {
+            text-transform: uppercase;
+            margin: 0 auto 50px;
+            border: 2px solid black;
+            padding: 10px 20px;
+            font-size: 30px;
+            width: fit-content;
+            position: relative;
+            z-index: 1;
+            transition: .3s;
+
+        }
+
+        .main-title::before,
+        .main-title::after {
+            content: "";
+            width: 12px;
+            height: 12px;
+            background-color: var(--main-color);
+            position: absolute;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .main-title::before {
+            left: -30px;
+        }
+
+        .main-title::after {
+            right: -30px;
+        }
+
+        .main-title:hover::before {
+            z-index: -1;
+            animation: left-move 0.5s linear forwards;
+        }
+
+        .main-title:hover::after {
+            z-index: -1;
+            animation: right-move 0.5s linear forwards;
+        }
+
+        .main-title:hover {
+            color: white;
+            border: 2px solid white;
+            transition-delay: 0.5s;
+        }
+
+        @keyframes left-move {
+            50% {
+                left: 0;
+                width: 12px;
+                height: 12px;
+            }
+
+            100% {
+                left: 0;
+                border-radius: 0;
+                width: 50%;
+                height: 100%;
+            }
+        }
+
+        @keyframes right-move {
+            50% {
+                right: 0;
+                width: 12px;
+                height: 12px;
+            }
+
+            100% {
+                right: 0;
+                border-radius: 0;
+                width: 50%;
+                height: 100%;
+            }
+        }
+
+        .cont {
+            margin-top: 5%;
+
+        }
+
+        section {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            width: 400px;
+            height: 300px;
+        }
+
+        .text {
+            width: 40%;
+        }
+           #navbarNav {
+            background-color: black;
+            color: white !important;
+        }
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+nav {
+  padding: 10px 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  z-index: 1;
+  width: 100%;
+}
+nav .logo {
+  display: flex;
+  align-items: center;
+}
+nav .logo img {
+  height: 25px;
+  width: auto;
+  margin-right: 10px;
+}
+nav .logo h1 {
+  font-size: 1.1rem;
+  background: linear-gradient(to right, #b927fc 0%, #2c64fc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+}
+nav ul li {
+  margin-left: 1.5rem;
+  margin-top: 10px;
+}
+nav ul li a {
+    position: relative;
+  text-decoration: none;
+  color: #000;
+  font-size: 95%;
+  font-weight: 400;
+  padding: 4px 8px;
+  border-radius: 5px;
+}
+
+
+nav ul li:hover {
+    transform: scale(1.1) !important;
+    transition: .3s;
+}
+nav ul li a:hover {
+    transition: .3s;
+    color: white;
+        font-weight: bold;
+}
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.hamburger .line {
+  width: 25px;
+  height: 1px;
+  background-color: #1f1f1f;
+  display: block;
+  margin: 7px auto;
+  transition: all 0.3s ease-in-out;
+}
+.hamburger-active {
+  transition: all 0.3s ease-in-out;
+  transition-delay: 0.6s;
+  transform: rotate(45deg);
+}
+
+.hamburger-active .line:nth-child(2) {
+  width: 0px;
+}
+
+.hamburger-active .line:nth-child(1),
+.hamburger-active .line:nth-child(3) {
+  transition-delay: 0.3s;
+}
+
+.hamburger-active .line:nth-child(1) {
+  transform: translateY(12px);
+}
+
+.hamburger-active .line:nth-child(3) {
+  transform: translateY(-5px) rotate(90deg);
+}
+
+.menubar {
+  position: absolute;
+  top: 0;
+  left: -90%;
+  display: none;
+  justify-content: center;
+  align-items: flex-start;
+  width: 80%;
+  height: 100vh;
+  padding: 20% 0;
+  background: rgba(255, 255, 255);
+  transition: all 0.5s ease-in;
+  z-index: 2;
+}
+.active {
+  left: -10%;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.menubar ul {
+  padding: 0;
+  list-style: none;
+}
+.menubar ul li {
+  margin-bottom: 32px;
+}
+
+.menubar ul li a {
+  text-decoration: none;
+  color: #000;
+  font-size: 95%;
+  font-weight: 400;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.menubar ul li a:hover {
+  background-color: #f5f5f5;
+}
+@media screen and (max-width: 790px) {
+  .hamburger {
+    display: block;
+  }
+  nav ul {
+    display: none;
+  }
+  .menubar {
+    width: 70%;
+    display: flex;
+  }
+}
+    .text {
+  text-align: center !important;
+}
+@media(max-width:850px) {
+  #sec {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 80px;
+
+  }
+  #sec div {
+    width: 100%;
+    text-align: center;
+  }
+  #Features {
+    margin-top: 100px;
+  }
+}
+    </style>
+
+    <div class="container-fluid area ">
+        <div class="container">
+            <header style="z-index: 2;position: relative;">
+                <div class="container-fluid fixed-top" style="padding-left: 0;"></div>
+                                <nav>
+                                    <div class="logo">
+                                        <svg width="30.9423" height="28" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none"
+                                            viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
+                                            <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill: #ff834f;">
+                                                <defs />
+                                                <g>
+                                                    <path class="fil0"
+                                                        d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+                                    <ul>
+                                        <li>
+                                            <a href="#home">Home</a>
+                                        </li>
+                                        <li>
+                                            <a href="#Features">Features</a>
+                                        </li>
+                                        <li>
+                                            <a href="#About">About</a>
+                                        </li>
+                                        <li>
+                                            <a href="#FeedBack">FeedBack</a>
+                                        </li>
+                                        <li>
+                                            <a href="#Footer">Footer</a>
+                                        </li>
+                                        <li>
+                                            <a href="/labs">Labs</a>
+                                        </li>
+                                    </ul>
+                                    <div class="hamburger">
+                                        <span class="line"></span>
+                                        <span class="line"></span>
+                                        <span class="line"></span>
+                                    </div>
+                                </nav>
+                                                <div class="container-fluid fixed-top" style="padding-left: 0;"></div>
+                                                <div class="menubar">
+                                                    <ul>
+                                                        <li>
+                                                            <a href="#home">Home</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#Features">Features</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#About">About</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#FeedBack">FeedBack</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="/labs">Labs</a>
+                                                        </li>
+
+                                                    </ul>
+                                                </div>
+                                                <script>
+                                                    const mobileNav = document.querySelector(".hamburger");
+                                                    const navbar = document.querySelector(".menubar");
+
+                                                    const toggleNav = () => {
+                                                        navbar.classList.toggle("active");
+                                                        mobileNav.classList.toggle("hamburger-active");
+                                                    };
+                                                    mobileNav.addEventListener("click", () => toggleNav());
+                                                </script>
+            </header>
+        </div>
+        <div class="home container " id="home" style="display: flex; height: 25rem;">
+            <section id="sec" class="d-flex align-items-center justify-content-evenly">
+                <div class="text">
+                    <h2>Welcome to <strong>Lab Master</strong> :)</h2>
+                    <p>Lab Master heralds a transformative era in laboratory management, where efficiency, innovation, and excellence converge to redefine scientific research and experimentation. With its unparalleled capabilities for managing lab components, sorting devices, and establishing seamless connections, Lab Master empowers users to unlock new realms of productivity and discovery.</p>
+                </div>
+                <div>
+                    <svg width="70.9423" height="80" x="80.0729" y="254.932" version="1.1" preserveAspectRatio="none"
+                        viewBox="92.1099853515625 49.80998229980469 662.4500122070312 747.0299682617188">
+                        <g transform="matrix(1 0 0 1 0 0)" class="icon1" style="fill: #ff834f;">
+                            <defs />
+                            <g>
+                                <path class="fil0"
+                                    d="M754.56 381.7l-305.94 -331.89 0 220.86 164.84 171.27 0 170.3 -13.92 12.21 116.18 102.61 38.84 -35.56 0 -309.8zm-356.51 -331.89l-305.94 331.89 0 309.8 38.84 35.57 116.18 -102.62 -13.92 -12.21 0 -170.3 164.84 -171.27 0 -220.86zm-229.73 711.47l38.84 35.56 432.34 0 38.86 -35.56 -117.01 -103.33 -13.93 12.22 -248.17 0 -13.93 -12.22 -117 103.33z" />
+                            </g>
+                        </g>
+                    </svg>
+
+
+                </div>
+            </section>
+        </div>
+        <ul class="circles">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+
+    <style>
+        .labs {
+            padding: 20px;
+            background-color: #a1a1aaab;
+        }
+    </style>
+    <div id="labs" class="labs">
+        <style>
+            .labat {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 300px);
+                grid-template-rows: 300px;
+                gap: 40px;
+                justify-content: center;
+            }
+
+            .card {
+                text-align: center;
+            }
+
+            .card .icon {
+                margin-left: 50%;
+                transform: translateX(-50%);
+                padding: 20px;
+            }
+        </style>
+        <div id="Features" class="container" style="margin-bottom: 40px;">
+            <h1 class="main-title"> Features</h1>
+            <div class="labat">
+                <div class="card">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M14.5 3.5C14.5 3.5 14.5 5.5 12 5.5C9.5 5.5 9.5 3.5 9.5 3.5H7.5L4.20711 6.79289C3.81658 7.18342 3.81658 7.81658 4.20711 8.20711L6.5 10.5V20.5H17.5V10.5L19.7929 8.20711C20.1834 7.81658 20.1834 7.18342 19.7929 6.79289L16.5 3.5H14.5Z" />
+                        </svg>
+                    </span>
+                    <h4>Adminstration</h4>
+                    <p>
+                        Lab Master simplifies administrative tasks by providing a comprehensive dashboard that centralizes all management
+                functions. From user access control to data management and reporting.
+                    </p>
+                    <div class="shine"></div>
+                    <div class="background">
+                        <div class="tiles">
+                            <div class="tile tile-1"></div>
+                            <div class="tile tile-2"></div>
+                            <div class="tile tile-3"></div>
+                            <div class="tile tile-4"></div>
+                            <div class="tile tile-5"></div>
+                            <div class="tile tile-6"></div>
+                            <div class="tile tile-7"></div>
+                            <div class="tile tile-8"></div>
+                            <div class="tile tile-9"></div>
+                            <div class="tile tile-10"></div>
+                        </div>
+                        <div class="line line-1"></div>
+                        <div class="line line-2"></div>
+                        <div class="line line-3"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4.5 9.5V5.5C4.5 4.94772 4.94772 4.5 5.5 4.5H9.5C10.0523 4.5 10.5 4.94772 10.5 5.5V9.5C10.5 10.0523 10.0523 10.5 9.5 10.5H5.5C4.94772 10.5 4.5 10.0523 4.5 9.5Z" />
+                            <path
+                                d="M13.5 18.5V14.5C13.5 13.9477 13.9477 13.5 14.5 13.5H18.5C19.0523 13.5 19.5 13.9477 19.5 14.5V18.5C19.5 19.0523 19.0523 19.5 18.5 19.5H14.5C13.9477 19.5 13.5 19.0523 13.5 18.5Z" />
+                            <path d="M4.5 19.5L7.5 13.5L10.5 19.5H4.5Z" />
+                            <path
+                                d="M16.5 4.5C18.1569 4.5 19.5 5.84315 19.5 7.5C19.5 9.15685 18.1569 10.5 16.5 10.5C14.8431 10.5 13.5 9.15685 13.5 7.5C13.5 5.84315 14.8431 4.5 16.5 4.5Z" />
+                        </svg>
+                    </span>
+                    <h4>Easy To Use</h4>
+                    <p>
+                        Our intuitive design ensures that users can navigate the platform with ease, reducing the learning curve and maximizing
+                        efficiency.
+                    </p>
+                    <div class="shine"></div>
+                    <div class="background">
+                        <div class="tiles">
+                            <div class="tile tile-1"></div>
+                            <div class="tile tile-2"></div>
+                            <div class="tile tile-3"></div>
+                            <div class="tile tile-4"></div>
+
+                            <div class="tile tile-5"></div>
+                            <div class="tile tile-6"></div>
+                            <div class="tile tile-7"></div>
+                            <div class="tile tile-8"></div>
+
+                            <div class="tile tile-9"></div>
+                            <div class="tile tile-10"></div>
+                        </div>
+
+                        <div class="line line-1"></div>
+                        <div class="line line-2"></div>
+                        <div class="line line-3"></div>
+                    </div>
+                </div>
+                <div class="card">
+                    <span class="icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"
+                            stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M4.5 9.5V5.5C4.5 4.94772 4.94772 4.5 5.5 4.5H9.5C10.0523 4.5 10.5 4.94772 10.5 5.5V9.5C10.5 10.0523 10.0523 10.5 9.5 10.5H5.5C4.94772 10.5 4.5 10.0523 4.5 9.5Z" />
+                            <path
+                                d="M13.5 18.5V14.5C13.5 13.9477 13.9477 13.5 14.5 13.5H18.5C19.0523 13.5 19.5 13.9477 19.5 14.5V18.5C19.5 19.0523 19.0523 19.5 18.5 19.5H14.5C13.9477 19.5 13.5 19.0523 13.5 18.5Z" />
+                            <path d="M4.5 19.5L7.5 13.5L10.5 19.5H4.5Z" />
+                            <path
+                                d="M16.5 4.5C18.1569 4.5 19.5 5.84315 19.5 7.5C19.5 9.15685 18.1569 10.5 16.5 10.5C14.8431 10.5 13.5 9.15685 13.5 7.5C13.5 5.84315 14.8431 4.5 16.5 4.5Z" />
+                        </svg>
+                    </span>
+                    <h4>Access</h4>
+                    <p>
+                        Lab Master offers seamless connectivity features that enable users to integrate Lab components with ease. 
+                    </p>
+                    <div class="shine"></div>
+                    <div class="background">
+                        <div class="tiles">
+                            <div class="tile tile-1"></div>
+                            <div class="tile tile-2"></div>
+                            <div class="tile tile-3"></div>
+                            <div class="tile tile-4"></div>
+
+                            <div class="tile tile-5"></div>
+                            <div class="tile tile-6"></div>
+                            <div class="tile tile-7"></div>
+                            <div class="tile tile-8"></div>
+
+                            <div class="tile tile-9"></div>
+                            <div class="tile tile-10"></div>
+                        </div>
+
+                        <div class="line line-1"></div>
+                        <div class="line line-2"></div>
+                        <div class="line line-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .about {
+            background-color: white;
+            padding: 70px 0;
+        }
+
+        .about .cont {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 400px);
+            grid-gap: 40px;
+            grid-template-rows: 400px;
+            justify-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+
+        }
+
+
+        .about .cont .box .rage .filed {
+            color: #ffc107;
+        }
+
+        .about .cont .box p {
+            color: #777;
+            font-size: 16px;
+            opacity: .8;
+            line-height: 27px;
+        }
+    </style>
+    <div class="about container" id="About">
+        <h1 class="main-title"> About Team</h1>
+        <div class="container-fliud">
+            <div class="container-fliud cont" style="padding: 0;">
+                <div class="cardd">
+                    <div class="img-bx">
+                        <img src="images/unk.jpg" alt="img" />
+                    </div>
+                    <div class="content">
+                        <div class="detail">
+                            <h2>Manuel Emad<br /><span>Backend Developer</span></h2>
+                            <div class="sci">
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardd">
+                    <div class="img-bx">
+                        <img src="images/zeyad img.jpeg" alt="img" />
+                    </div>
+                    <div class="content">
+                        <div class="detail">
+                            <h2>Zeyad Mohamed<br /><span>Frontend Developer</span></h2>
+                            <div class="sci">
+                                <li>
+                                    <a target="_blank" href="https://web.facebook.com/zeyd.mohad?mibextid=ZbWKwL&_rdc=1&_rdr"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://x.com/Zeyad1468?t=6eEqLNTl_GDjpndoic9mpw&s=09"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.linkedin.com/in/zeyad-m-muhammedin-2a3097287?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="https://www.instagram.com/zeyad.__.mohamed/?igsh=ZWZ4MHZyNGp5ZmR2"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cardd">
+                    <div class="img-bx">
+                        <img src="images/youssef.jpg" alt="img" />
+                    </div>
+                    <div class="content">
+                        <div class="detail">
+                            <h2>Yousef Diaa<br /><span>Frontend Developer</span></h2>
+                            <div class="sci">
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-facebook-f"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a  target="_blank" href="#"><i class="fab fa-linkedin-in"></i></a>
+                                </li>
+                                <li>
+                                    <a target="_blank" href="#"><i class="fab fa-instagram"></i></a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <style>
+        .feedback {
+
+            padding: 20px;
+            background-color: #eee;
+        }
+
+        .discount {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .discount .left {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--main-color-alt);
+        }
+
+        .discount .left h1 {
+            font-size: 37px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .discount .left p {
+            text-align: center;
+            max-width: 550px;
+            color: white;
+            padding-top: 20px;
+        }
+
+        .discount .left img {
+            max-width: 70%;
+        }
+
+        .discount .rigth {
+            display: flex;
+            width: 50%;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width:991px) {
+            .discount {
+                display: block;
+            }
+
+            .discount .left {
+                width: 100%;
+            }
+
+            .discount .left h1 {
+                font-size: 26px;
+            }
+
+            .discount .rigth {
+                padding-top: 50px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width:670px) {
+            .text {
+                width: 100%;
+                text-align: center;
+            }
+
+            #sec {
+                flex-direction: column !important;
+            }
+        }
+
+        .discount .rigth h1 {
+            font-size: 30px;
+            padding-bottom: 15px;
+            color: black;
+            font-weight: bold;
+        }
+
+        .discount .rigth form input {
+            display: block;
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-bottom: 1px solid #6666;
+            background-color: #f3f3f394;
+            caret-color: var(--main-color);
+
+        }
+
+        .discount .rigth form textarea {
+            margin-top: 20px;
+            border: none;
+            border-bottom: 1px solid #6666;
+            background-color: #f3f3f394;
+            padding: 10px;
+            caret-color: var(--main-color);
+            resize: none;
+
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .discount .rigth form .send {
+            background-color: var(--main-color);
+            border: none;
+            color: white;
+            font-weight: bold;
+            transition: .3s;
+        }
+
+        .discount .rigth form .send:hover {
+            background-color: var(--main-color-alt);
+        }
+    </style>
+    <div class="feedback" id="FeedBack">
+        <h1 class="main-title"> FeedBack</h1>
+        <div class="discount ">
+            <div class="left">
+                <p>Your input is invaluable to us as we strive to enhance your experience with Lab Master. Please take a moment to share
+                    your thoughts, suggestions, and ideas with us</p>
+                <img src="https://elzerowebschool.github.io/HTML_And_CSS_Template_Three/imgs/discount.png" alt="">
+            </div>
+        <div class="rigth">
+            <h1>Write Your Comment
+            </h1>
+            <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSehkgIEFucpyyCrge9fHRPHke5fMlRbPSvWS3B8O2TYstQi2Q/viewform?embedded=true"
+                width="400" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+        </div>
+        </div>
+    </div>
+            <footer id="Footer" class="footer-16371">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 text-center">
+                            <div class="footer-site-logo mb-4">
+                                <a href="#">Lab Master</a>
+                            </div>
+                            <ul class="list-unstyled nav-links mb-5">
+                                <li><a href="#home">Home</a></li>
+                                <li><a href="#Features">Features</a></li>
+                                <li><a href="#About">About</a></li>
+                                <li><a href="#FeedBack">FeedBack</a></li>
+                            </ul>
+                            <div class="social mb-4">
+                                <h3>Stay in touch</h3>
+                                <ul class="list-unstyled">
+                                    <li class="in"><a href="#"><span class="fab fa-facebook-f"></span></a></li>
+                                    <li class="fb"><a href="#"><span class="fab fa-twitter"></span></a></li>
+                                    <li class="tw"><a href="#"><span class="fab fa-linkedin-in"></span></a></li>
+                                    <li class="pin"><a href="#"><span class="fab fa-instagram"></span></a></li>
+                                </ul>
+                            </div>
+            
+                            <div class="copyright">
+                                <p class="mb-0"><small>&copy; LabMaster. All Rights Reserved.</small></p>
+                            </div>
+            
+            
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <style>
+                a {
+                    text-decoration: none;
+                }
+            
+            
+                .footer-16371 {
+                    padding: 20px 0;
+                    font-family: "Poppins", sans-serif;
+                }
+            
+                .footer-16371 .footer-site-logo {
+                    text-align: center;
+                    font-size: 2rem;
+                    font-weight: 900;
+                }
+            
+                .footer-16371 .footer-site-logo a {
+                    color: var(--main-color);
+                }
+            
+                .footer-16371 .nav-links {
+                    padding: 0;
+                    margin: 0;
+                }
+            
+                .footer-16371 .nav-links li {
+                    display: inline-block;
+                }
+            
+                .footer-16371 .nav-links li a {
+                    padding: 10px;
+                    color: #000;
+                }
+            
+                .footer-16371 .nav-links li a:hover {
+                    color: var(--main-color)
+                }
+            
+                .footer-16371 .social h3 {
+                    font-weight: bold;
+                    font-size: 18px;
+                    color: #000;
+                }
+            
+                .footer-16371 .social ul li {
+                    display: inline-block;
+                }
+            
+                .footer-16371 .social ul li a {
+                    display: inline-block;
+                    padding: 10px;
+                }
+            
+                .footer-16371 .social ul li.in a {
+                    color: #df588a;
+                }
+            
+                .footer-16371 .social ul li.tw a {
+                    color: #15b8ff;
+                }
+            
+                .footer-16371 .social ul li.fb a {
+                    color: #3742d0;
+                }
+            
+                .footer-16371 .social ul li.dr a {
+                    color: #fa38c1;
+                }
+            
+                .footer-16371 .social ul li.pin a {
+                    color: #dd4d5a;
+                }
+            
+                .footer-16371 .copyright {
+                    color: #999999;
+                }
+            </style>
+    <script src="https://kit.fontawesome.com/66aa7c98b3.js" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+</body>
+
+</html>

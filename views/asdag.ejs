@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labs</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/labs for admins&user.css">
+</head>
+<style>
+    #mssfordeletelab {
+        padding: 55px;
+        border-radius: 20px;
+        background-color: black;
+        color: white;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 100;
+    }
+
+    #mssfordeletelab .btns {
+        margin-top: 35px;
+        display: flex;
+        justify-content: space-evenly;
+        padding: 0px 20%;
+    }
+
+    #mssfordeletelab .conttoclose {
+        display: flex;
+        justify-content: right;
+        margin-bottom: 20px;
+    }
+
+    #mssfordeletelab .btn-close {
+        padding: 7px;
+        border-radius: 50%;
+        cursor: pointer;
+        color: white;
+        text-align: right;
+    }
+</style>
+
+<body class="bg-dark text-white">
+    <div id="labs" class="labs">
+        <div id="mssfordeletelab" class="d-none">
+            <div class="conttoclose"> <button id="closemssforadmin" class="btn-close text-white bg-white"></button>
+            </div>
+            <h4 class="mss">Are You Sure To Delete This Lab ?</h4>
+            <div class="btns">
+                <button class="btn btn-danger" id="yes"> Yes </button>
+                <button class="btn btn-primary" id="no"> No </button>
+            </div>
+        </div>
+        <div class="container labs">
+            <div id="modellab" class="modellab">
+                <div class="closep">
+                    <i id="close" class="close bg-white text-white btn btn-close"></i>
+                </div>
+                <form action="#" class="was-validated">
+                    <label for="validationServer03" class="form-label">Lab Name</label>
+                    <input type="text" class="form-control" id="name" aria-describedby="validationServer03Feedback"
+                        required>
+                    <div id="validationServer03Feedback" class="invalid-feedback">
+                        the name of lab at least must contain 3 letters
+                    </div>
+
+                    <label for="">Ifno About Lab:</label>
+                    <textarea maxlength="180" placeholder="the max length is 180 character" type="text" rows="2"
+                        class="form-control" id="info"></textarea>
+                    <label for="">Select the image of Lab:</label>
+                    <div class="imgs">
+                        <img class="img" src="images/img1.jpeg" alt="IMG_can't dawnload">
+                        <img class="img" src="images/img2.jpeg" alt="IMG_can't dawnload">
+                        <img class="img" src="images/img3.jpeg" alt="IMG_can't dawnload">
+                        <img class="img" src="images/img4.jpeg" alt="IMG_can't dawnload">
+                    </div>
+                    <button onclick="reloadpage()" class="btn btn-outline-primary" type="submit" id="createlab"> Create Lab</button>
+                </form>
+            </div>
+            <h1 class="main-title"> Your Labs</h1>
+            <div class="labat" id="labat">
+            <% labs.forEach(function(lab, index) { %>
+                <article class="card">
+                    <img class="card__background" src="./images/<%= lab.img %>" alt="IMG_can't dawnload" />
+                    <div class="card__content | flow">
+                        <div class="card__content--container | flow">
+                            <h2 class="card__title"><%= lab.name %></h2>
+                            <p class="card__description">
+                                <%= lab.Desc || "No Description" %>
+                            </p>
+                        </div>
+                        <div>
+                            <a class="card__button" href="/dash<%= index + 1 %>">View</a>
+                            <% if (user.admin == true) { %>
+                            <button onclick="editlab(<%= index %>)" class="card__button">Edit</button>
+                            <button onclick="deletelab(<%= index %>)" id="deletelab" class="card__button btn btn-danger">Delete</button>
+                            <% } %>
+                        </div> 
+                    </div>
+                </article>
+            <% }) %>
+            <% if (user.admin == true) { %>
+                <div style="background-color: #eee; border-radius: 20px; box-shadow: 0px 0px 16px -8px black; display: flex; justify-content: center; align-items: center;" id="addlabc">
+                    <button id="addlab" onclick="addnewlab()" class="btn btn-outline-dark"> <i class="fa-solid fa-plus"></i> Create new Lab</button>
+                </div>
+            <% } %>
+
+        </div>          
+        </div>
+    </div>
+    <script>
+    function reloadpage(){
+        setTimeout(1000)
+        location.reload();
+    }</script>
+    <script src="js/Labs_for_Admin.js"></script>
+    
+</body>
+
+</html>

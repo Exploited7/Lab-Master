@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/singup.css"> 
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+</head> 
+<body class="bg-dark">
+    <style>
+        @media(min-width:900px) {
+            .main-log {
+                width: 75%;
+                margin: 0 auto;
+            }
+        }
+    </style>
+    <div class="main ">
+        <section class="sign-in main-log">
+            <div class="container">
+                <div class="signin-content">
+                    <div class="signin-image">
+                        <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                    </div>
+                    <div class="signin-form">
+                        <h2 class="form-title">Log in</h2>
+                        <form method="POST" action="/login" class="register-form">
+                            <p class="alert"> </p>
+                            <div class="form-group">
+                                <label for="email"><i class="fa-solid fa-envelope"></i></label>
+                                <input class="form-control" type="email" name="email" id="email"
+                                    placeholder="Your Email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="fa-solid fa-lock"></i></label>
+                                <input class="form-control" type="password" name="pass" id="pass"
+                                    placeholder="Password" />
+                            </div>
+                            <% if (error) { %>
+                                <div style="color: red;"><%= error %></div>
+                            <% } %>
+                            <div class="form-group form-button">
+                                <button class="form-submit" id="log" type="submit">Log In</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>

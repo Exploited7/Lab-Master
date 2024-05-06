@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/Exampale for lab.css">
+    <style>
+        .back {
+
+            padding: 10px;
+            border-radius: 50%;
+            border: 2px solid #2196f3;
+            background-color: #2195f38a;
+
+        }
+
+        .back a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .btnbefore {
+            display: flex;
+            justify-content: end;
+        }
+
+        .mssforuser {
+            text-align: center;
+            width: 35%;
+            padding: 30px;
+            background-color: black;
+            color: white;
+            border-radius: 15px;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 40;
+            transform: translate(-50%, -50%);
+        }
+
+        .mssforuser .btnns {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 35px;
+            padding: 1px 35%;
+        }
+
+        .conttoclosecom {
+            display: flex;
+            justify-content: end;
+            margin-bottom: 20px;
+        }
+
+        #mssfordeletelab .btn-close {
+            padding: 7px;
+            border-radius: 50%;
+            cursor: pointer;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-dark text-white">
+    <% if (user.admin == true) { %>
+    <div class="container">
+        <section style="position: relative;">
+            <button class="back"> <a href="/labs"><-- </a> </button>
+            <div id="mssforuser" class="mssforuser d-none">
+                <div class="conttoclosecom"><button id="closemsscom" class="btn-close text-white bg-white"></button>
+                </div>
+                <h4>Are You Sure ? </h4>
+                <div class="btnns">
+                    <button class="btn btn-danger" id="yes">Yes</button>
+                    <button class="btn btn-primary" id="no">No</button>
+                </div>
+            </div>
+            <div class="editation d-none" id="editation">
+                <div class="contclose">
+                    <button id="closeedit" class="btn btn-close text-white bg-white"></button>
+                </div>
+                <p id="alertforsum" class="alert alert-danger d-none"> the Number of quantity not Equal the sum of
+                    running component and damage </p>
+                <label for="">Type:</label>
+                <input type="text" class="form-control" id="type">
+                <p id="alertfortype" class="alert alert-danger d-none">You must enter the type of component</p>
+                <label for=""> Quantity</label>
+                <input type="number" class="form-control" id="quantity">
+                <p id="alertforq" class="alert alert-danger d-none">You must enter the quantity of component</p>
+                <label for="">running</label>
+                <input type="number" class="form-control" id="run">
+                <label for="">Damage</label>
+                <input type="number" class="form-control" id="damage">
+                <label for="">Comments:</label>
+                <p class="alert alert-info d-none" id="howwritecomment"> You Must Separete brtween Each comment By
+                    <strong> comma " , "</strong> </p>
+                <textarea onfocus="lol()" type="text" class="form-control" id="comments"> </textarea>
+                <button id="Edit" class=" btn btn-outline-primary">Edit</button>
+            </div>
+            <div style="background-color: black; " class="writecomment w-50">
+                <div class="closep">
+                    <span class="btn btn-close text-white bg-white" id="close"> </span>
+                </div>
+                <h3 style="color: white;">Write your comment here:</h3>
+                <input type="text" id="inputcomment" class="form-control ">
+                <p class="alert alert-danger d-none " id="alert"> the comment at least contain 2 characters </p>
+                <button class="btn btn-outline-danger addc" style="margin-top: 15px;" id="radd"> Add comment </button>
+            </div>
+            <h1 class="main-title"> components of Lab </h1>
+            <div class="btnbefore">
+                <button id="addcom" class="btn btn-primary"> Add New Component </button>
+                <button id="deleteallcom" class="btn btn-danger"> Delete ALL </button>
+            </div>
+            <table id="components" class="table  w-100  table-dark  table-hover">
+                <thead>
+                    <th> number </th>
+                    <th>Type</th>
+                    <th>Quantity</th>
+                    <th>running</th>
+                    <th>Damage</th>
+                    <th>Comments</th>
+                    <th>Add Comment</th>
+                    <th>Editation</th>
+                    <th>Remove</th>
+                </thead>
+                <tbody>
+                    <% if (bodycom) { %>
+                    <% for(let i = 0; i < bodycom.length; i++) { %>
+                        <tr>
+                            <td> <%= i + 1 %> </td>
+                            <td> <%= bodycom[i].type %> </td>
+                            <td> <%= bodycom[i].Quantity %> </td>
+                            <td> <%= bodycom[i].running %> </td>
+                            <td> <%= bodycom[i].Damage %> </td>
+                            <td>
+                                <ul class="comment">
+                                    <li> <%= bodycom[i].comments.length === 0 ? "No Comments" : bodycom[i].comments.join(" || ") %> </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <button onclick="add(<%= i %>)" class="btn btn-outline-primary">Add Comment</button>
+                            </td>
+                            <td>
+                                <button onclick="edit(<%= i %>)" class="btn btn-outline-info">Edit</button>
+                            </td>
+                            <td>
+                                <button onclick="removecom(<%= i %>)" class="btn btn-outline-danger">Remove</button>
+                            </td>
+                        </tr>
+                    <% } %>
+                    <% } else { %>
+
+                    <% } %>
+                </tbody>                
+            </table> 
+            <h1 class="main-title" style="margin-top: 50px;"> The Computers of lab </h1>
+            <style>
+                #contaddpc {
+                    z-index: 100;
+                    width: 60%;
+                    background-color: black;
+                    padding: 30px;
+                    border-radius: 20px;
+                    color: white;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                #contaddpc label {
+                    margin-top: 10px;
+                    margin-bottom: 5px;
+                }
+
+                #contaddpc button {
+                    margin-top: 15px;
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                #addpc {
+                    margin-left: 100%;
+                    transform: translateX(-90%);
+                    width: fit-content;
+                }
+
+                .closeconta {
+                    display: flex;
+                    justify-content: end;
+                    margin: 0px;
+                    padding: 0px;
+                }
+
+                .btn-close {
+                    padding: 7px;
+                    border-radius: 50%;
+                    margin: 0px;
+                }
+                .contofeditpc {
+                    width: 60%;
+                    background-color: black;
+                    padding: 40px;
+                    border-radius: 20px;
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: 1000;
+                    color: white;
+                }
+                .contofeditpc label {
+                    margin-top: 20px;
+                }
+                .contofeditpc button {
+                    margin-left: 50%;
+                    transform: translateX(-50%);
+                    margin-top: 10px;
+                }
+            </style>
+            <div id="contofeditpc" class="contofeditpc d-none">
+                <div class="closeconta m-0">
+                    <button id="closeeditpc" class="btn m-0 btn-close bg-white color-white"></button>
+                </div>
+                <label for="">Name Of PC:</label>
+                <input type="text" class="form-control" id="editnamepc">
+                <p id="alertfornameedit" class="alert alert-danger d-none">You must Enter the name of PC</p>
+                <button id="btneditpc" class="btn btn-outline-info"> Edit </button>
+            </div>
+            <div id="contaddpc" class="d-none">
+                <div class="closeconta m-0">
+                    <button id="closeaddpc" class="btn m-0 btn-close bg-white color-white"></button>
+                </div>
+                <label for="">Name of Pc:</label>
+                <input type="text" class="form-control" id="namepc">
+                <p id="alertfornamepc" class="alert alert-danger d-none ">You must enter the name of Pc</p>
+                <button class="btn btn-outline-primary" id="createpc"> Add </button>
+            </div>
+            <div class="btnbefore">
+                <button id="addpc" class="btn btn-primary"> Add New Computer </button>
+                <button id="deleteallcomputers" class="btn btn-danger"> Delete All </button>
+
+            </div>
+            <table id="comtable" class="table w-100 table-dark  table-hover">
+                <thead>
+                    <th> Number </th>
+                    <th> Name of PC </th>
+                    <th> staute to connect </th>
+                    <th> Connect </th>
+                </thead>
+                <% if (computers) { %>
+                    <% for(let i = 0; i < computers.length; i++) { %>
+                        <tr>
+                            <td> <%= i + 1 %> </td>
+                            <td> <%= computers[i].name %> </td>
+                            <td> <%= computers[i].staute %> </td>
+                            <td> <a class="btn btn-outline-info" id="connectButton" href="#" onclick="showInputDialog()">Connect to Remote PC</a>
+                            <!-- <td> <button onclick="editpc(<%= i %>)" class="btn btn-outline-primary"> Edit </button>  </td> -->
+                            <td> <button onclick="deletee(<%= i %>)" class="btn btn-outline-danger"> Remove </button>  </td>
+                        </tr>
+                    <% } %>
+                    <% } else { %>
+
+                    <% } %>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script>
+    <script src="js/Exampale of lab for admin.js"></script>
+    <% } else if (user.admin == false) { %>
+        <div class="container">
+            <section style="position: relative;">
+                <button class="back"> <a href="/"><-- </a> </button>
+                <div id="mssforuser" class="mssforuser d-none">
+                    <div class="conttoclosecom"><button id="closemsscom" class="btn-close text-white bg-white"></button>
+                    </div>
+                    <h4>Are You Sure ? </h4>
+                    <div class="btnns">
+                        <button class="btn btn-danger" id="yes">Yes</button>
+                        <button class="btn btn-primary" id="no">No</button>
+                    </div>
+                </div>
+                <div class="editation d-none" id="editation">
+                    <div class="contclose">
+                        <button id="closeedit" class="btn btn-close text-white bg-white"></button>
+                    </div>
+                    <p id="alertforsum" class="alert alert-danger d-none"> the Number of quantity not Equal the sum of
+                        running component and damage </p>
+                    <label for="">Type:</label>
+                    <input type="text" class="form-control" id="type">
+                    <p id="alertfortype" class="alert alert-danger d-none">You must enter the type of component</p>
+                    <label for=""> Quantity</label>
+                    <input type="number" class="form-control" id="quantity">
+                    <p id="alertforq" class="alert alert-danger d-none">You must enter the quantity of component</p>
+                    <label for="">running</label>
+                    <input type="number" class="form-control" id="run">
+                    <label for="">Damage</label>
+                    <input type="number" class="form-control" id="damage">
+                    <label for="">Comments:</label>
+                    <p class="alert alert-info d-none" id="howwritecomment"> You Must Separete brtween Each comment By
+                        <strong> comma " , "</strong> </p>
+                    <textarea onfocus="lol()" type="text" class="form-control" id="comments"> </textarea>
+                    <button id="Edit" class=" btn btn-outline-primary">Edit</button>
+                </div>
+                <div style="background-color: black; " class="writecomment w-50">
+                    <div class="closep">
+                        <span class="btn btn-close text-white bg-white" id="close"> </span>
+                    </div>
+                    <h3 style="color: white;">Write your comment here:</h3>
+                    <input type="text" id="inputcomment" class="form-control ">
+                    <p class="alert alert-danger d-none " id="alert"> the comment at least contain 2 characters </p>
+                    <button class="btn btn-outline-danger addc" style="margin-top: 15px;" id="radd"> Add comment </button>
+                </div>
+                <h1 class="main-title"> components of Lab </h1>
+                <table id="components" class="table  w-100  table-dark  table-hover">
+                    <thead>
+                        <th> number </th>
+                        <th>Type</th>
+                        <th>Quantity</th>
+                        <th>running</th>
+                        <th>Damage</th>
+                        <th>Comments</th>
+                        <th>Add Comment</th>
+                    </thead>
+                    <tbody>
+                        <% if (bodycom) { %>
+                        <% for(let i = 0; i < bodycom.length; i++) { %>
+                            <tr>
+                                <td> <%= i + 1 %> </td>
+                                <td> <%= bodycom[i].type %> </td>
+                                <td> <%= bodycom[i].Quantity %> </td>
+                                <td> <%= bodycom[i].running %> </td>
+                                <td> <%= bodycom[i].Damage %> </td>
+                                <td>
+                                    <ul class="comment">
+                                        <li> <%= bodycom[i].comments.length === 0 ? "No Comments" : bodycom[i].comments.join(" || ") %> </li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <button onclick="add(<%= i %>)" class="btn btn-outline-primary">Add Comment</button>
+                                </td>
+                            </tr>
+                        <% } %>
+                        <% } else { %>
+    
+                        <% } %>
+                    </tbody>                
+                </table> 
+                <h1 class="main-title" style="margin-top: 50px;"> The Computers of lab </h1>
+                <style>
+                    #contaddpc {
+                        z-index: 100;
+                        width: 60%;
+                        background-color: black;
+                        padding: 30px;
+                        border-radius: 20px;
+                        color: white;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                    }
+    
+                    #contaddpc label {
+                        margin-top: 10px;
+                        margin-bottom: 5px;
+                    }
+    
+                    #contaddpc button {
+                        margin-top: 15px;
+                        margin-left: 50%;
+                        transform: translateX(-50%);
+                    }
+    
+                    #addpc {
+                        margin-left: 100%;
+                        transform: translateX(-90%);
+                        width: fit-content;
+                    }
+    
+                    .closeconta {
+                        display: flex;
+                        justify-content: end;
+                        margin: 0px;
+                        padding: 0px;
+                    }
+    
+                    .btn-close {
+                        padding: 7px;
+                        border-radius: 50%;
+                        margin: 0px;
+                    }
+                    .contofeditpc {
+                        width: 60%;
+                        background-color: black;
+                        padding: 40px;
+                        border-radius: 20px;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1000;
+                        color: white;
+                    }
+                    .contofeditpc label {
+                        margin-top: 20px;
+                    }
+                    .contofeditpc button {
+                        margin-left: 50%;
+                        transform: translateX(-50%);
+                        margin-top: 10px;
+                    }
+                </style>
+                <div id="contofeditpc" class="contofeditpc d-none">
+                    <div class="closeconta m-0">
+                        <button id="closeeditpc" class="btn m-0 btn-close bg-white color-white"></button>
+                    </div>
+                    <label for="">Name Of PC:</label>
+                    <input type="text" class="form-control" id="editnamepc">
+                    <p id="alertfornameedit" class="alert alert-danger d-none">You must Enter the name of PC</p>
+                    
+                    <button id="btneditpc" class="btn btn-outline-info"> Edit </button>
+                </div>
+                <div id="contaddpc" class="d-none">
+                    <div class="closeconta m-0">
+                        <button id="closeaddpc" class="btn m-0 btn-close bg-white color-white"></button>
+                    </div>
+                    <label for="">Name of Pc:</label>
+                    <input type="text" class="form-control" id="namepc">
+                    <p id="alertfornamepc" class="alert alert-danger d-none ">You must enter the name of Pc</p>
+                    
+                    <button class="btn btn-outline-primary" id="createpc"> Add </button>
+                </div>
+                <table id="comtable" class="table w-100 table-dark  table-hover">
+                    <thead>
+                        <th> Number </th>
+                        <th> Name of PC </th>
+                        <th> staute to connect </th>
+                        <th> Connect </th>
+                    </thead>
+                    <% if (computers) { %>
+                    <% for(let i = 0; i < computers.length; i++) { %>
+                        <tr>
+                            <td> <%= i + 1 %> </td>
+                            <td> <%= computers[i].name %> </td>
+                            <td> <%= computers[i].staute %> </td>
+                            <td> <a class="btn btn-outline-info" id="connectButton" href="#" onclick="showInputDialog()">Connect to Remote PC</a>
+                        </tr>
+
+                    <% } %>
+                    <% } else { %>
+
+                    <% } %>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+        <script src="js/bootstrap.bundle.js"></script>
+        <script src="js/Exampale of lab for admin.js"></script>
+   <% } %>
+</body>
+
+</html>

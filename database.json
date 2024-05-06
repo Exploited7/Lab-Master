@@ -1,0 +1,133 @@
+{
+ "labs": [
+  {
+   "name": "lab45",
+   "Desc": "No Desc",
+   "img": "../images/img1.jpeg"
+  },
+  {
+   "name": "Lab 2",
+   "Desc": "lab 2",
+   "img": "img2.jpeg"
+  },
+  {
+   "name": "Lab 3",
+   "Desc": "Lab 3",
+   "img": "img3.jpeg"
+  },
+  {
+   "name": "lab 4",
+   "Desc": "lab 4",
+   "img": "../images/img2.jpeg"
+  },
+  {
+   "name": "asdasdasd",
+   "Desc": "",
+   "img": "img2.jpeg"
+  },
+  {
+   "name": "lab6",
+   "Desc": "manoibetter",
+   "img": "img1.jpeg"
+  },
+  {
+   "name": "test",
+   "Desc": "",
+   "img": "img4.jpeg"
+  }
+ ],
+ "components6": [
+  {
+   "type": "sadsadsad",
+   "Quantity": "6",
+   "running": "3",
+   "Damage": "3",
+   "comments": [
+    "dsadsad"
+   ]
+  }
+ ],
+ "computers3": [
+  {
+   "name": "Pc 1",
+   "staute": "?",
+   "IPAddress": "10.16.19.50"
+  }
+ ],
+ "components4": [
+  {
+   "type": "computers",
+   "Quantity": "30",
+   "running": "20",
+   "Damage": "10",
+   "comments": [
+    [
+     "Done "
+    ]
+   ]
+  }
+ ],
+ "computers4": [
+  {
+   "name": "pc1",
+   "staute": "?",
+   "IPAddress": "10.16.19.50"
+  }
+ ],
+ "components5": [
+  {
+   "type": "pcs",
+   "Quantity": "10",
+   "running": "5",
+   "Damage": "5",
+   "comments": [
+    "test"
+   ]
+  },
+  {
+   "type": "testtt",
+   "Quantity": "32",
+   "running": "16",
+   "Damage": "16",
+   "comments": [
+    "hi\n"
+   ]
+  }
+ ],
+ "componentsundefined": [
+  {
+   "type": "test5",
+   "Quantity": "5",
+   "running": "3",
+   "Damage": "2",
+   "comments": []
+  },
+  {
+   "type": "pcs",
+   "Quantity": "10",
+   "running": "5",
+   "Damage": "5",
+   "comments": [
+    "test",
+    "asdasd"
+   ]
+  },
+  {
+   "type": "pc",
+   "Quantity": "10",
+   "running": "5",
+   "Damage": "5",
+   "comments": [
+    "sad"
+   ]
+  }
+ ],
+ "computersundefined": [
+  {
+   "name": "mano",
+   "staute": "?",
+   "IPAddress": "192.168.1.1"
+  }
+ ],
+ "components1": []
+}
